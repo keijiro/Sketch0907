@@ -30,11 +30,8 @@ sealed class SceneRenderer : MonoBehaviour
 
     void OnValidate()
     {
-        if (_mesh == null) return;
-
-        // Clear and reconstruction
-        _mesh.Clear();
-        ConstructMesh();
+        // Mesh reconstruction
+        if (_mesh != null) ConstructMesh();
     }
 
     void OnDestroy()
