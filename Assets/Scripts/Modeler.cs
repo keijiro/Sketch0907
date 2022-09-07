@@ -4,6 +4,7 @@ using System;
 
 namespace Sketch {
 
+// A simple copy-instance modeler
 readonly struct Modeler
 {
     #region Model properties
@@ -54,7 +55,7 @@ readonly struct Modeler
         var rot = quaternion.RotateZ(_rotation);
         var mtx = float4x4.TRS(_position, rot, 1);
         for (var i = 0; i < _shape.Vertices.Length; i++)
-            dest[i] = math.transform(mtx, _shape.Vertices[i]);// + _position;
+            dest[i] = math.transform(mtx, _shape.Vertices[i]);
     }
 
     void FillUVs(Span<float4> dest)

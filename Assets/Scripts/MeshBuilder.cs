@@ -8,7 +8,7 @@ namespace Sketch {
 // Modeler array -> Single combined mesh
 static class MeshBuilder
 {
-    unsafe public static void Build(Span<Modeler> modelers, Mesh mesh)
+    public static void Build(Span<Modeler> modelers, Mesh mesh)
     {
         // Total vertex / index count
         var (vcount, icount) = (0, 0);
