@@ -1,14 +1,16 @@
 using UnityEngine;
-using System.Collections.Generic;
 using Unity.Mathematics;
-using Random = Unity.Mathematics.Random;
 using System;
+using Random = Unity.Mathematics.Random;
 
 namespace Sketch {
 
+// Configuration struct for SceneBuilder
 [Serializable]
 struct SceneConfig
 {
+    #region Editable attributes
+
     public int PoleCount;
     public float BaseRange;
     public float NodeStride;
@@ -17,6 +19,10 @@ struct SceneConfig
     public Color EmissionColor2;
     public float EmissionIntensity;
     public uint Seed;
+
+    #endregion
+
+    #region Default configuration
 
     public static SceneConfig Default()
       => new SceneConfig()
@@ -28,19 +34,32 @@ struct SceneConfig
           EmissionColor2 = Color.blue,
           EmissionIntensity = 600,
           Seed = 10 };
+
+    #endregion
+
+    #region Helper methods
+
+    public Color ChooseEmission(float random)
+      => (random < EmissionRate ?
+           (random < EmissionRate / 2 ? EmissionColor1 : EmissionColor2)
+             : Color.clear) * EmissionIntensity;
+
+    #endregion
 }
 
+// SceneBuilder: Model-level scene building
 static class SceneBuilder
 {
     public static Span<Modeler> Build
-      (SceneConfig cfg,
-       (GeometryCache board, GeometryCache pole) shapes,
-       Span<Modeler> outBuffer)
+      (in SceneConfig cfg,
+       (GeometryCacheRef board, GeometryCacheRef pole) shapes,
+       Span<Modeler> buffer)
     {
-        var outCount = 0;
-
         // PRNG
         var (hash, seed) = (new XXHash(cfg.Seed), 0u);
+
+        // Buffer output count
+        var count = 0;
 
         // Pole population
         for (var i = 0; i < cfg.PoleCount; i++)
@@ -49,51 +68,49 @@ static class SceneBuilder
             var pos = math.float3(hash.InCircle(seed++) * cfg.BaseRange, 0);
             var angle = hash.Bool(seed++) ? 0 : math.PI / 4;
 
-            // Emitter
-            var emitter = hash.Float(seed++) < cfg.EmissionRate;
-            var ecolor = hash.Bool(seed++) ? cfg.EmissionColor1 : cfg.EmissionColor2;
-            ecolor *= cfg.EmissionIntensity;
+            // Emission color (zero for no-emission)
+            var emission = cfg.ChooseEmission(hash.Float(seed++));
 
             // Probability decay coefficient
             var decay = hash.Float(0.1f, 0.96f, seed++);
 
+            // Pole extension loop
             for (var prob = 1.0f; prob > 0.2f;)
             {
                 for (var k = 0; k < 4; k++)
                 {
-                    // Rotation
+                    // Rotation matrix
                     var rot = float2x2.Rotate(angle);
 
-                    // Board
-                    var d1 = math.float2(cfg.NodeStride * 0.5f, 0);
+                    // Board: Displacement / position
+                    var d1 = math.float2(cfg.NodeStride / 2, 0);
                     var p1 = pos + math.float3(math.mul(rot, d1), 0);
 
-                    // Pole
-                    var d2 = (float2)(cfg.NodeStride * 0.5f);
+                    // Pole: Displacement / position
+                    var d2 = (float2)(cfg.NodeStride / 2);
                     var p2 = pos + math.float3(math.mul(rot, d2), 0);
 
-                    // Modeler addition
+                    // Board model
                     if (hash.Float(seed++) < prob)
-                        outBuffer[outCount++] = 
-                          new Modeler(position: p1,
-                                      rotation: angle,
-                                      color: Color.black,
-                                      shape: shapes.board);
+                        buffer[count++] = new Modeler(position: p1,
+                                                      rotation: angle,
+                                                      color: Color.black,
+                                                      shape: shapes.board);
 
-                    outBuffer[outCount++] =
-                      new Modeler(position: p2,
-                                  rotation: angle,
-                                  color: Color.black,
-                                  shape: shapes.pole);
+                    // Pole model
+                    buffer[count++] = new Modeler(position: p2,
+                                                  rotation: angle,
+                                                  color: Color.black,
+                                                  shape: shapes.pole);
 
-                    if (emitter)
-                        outBuffer[outCount++] =
-                          new Modeler(position: pos,
-                                      rotation: 0,
-                                      color: ecolor,
-                                      shape: shapes.pole);
+                    // Emitter model
+                    if (emission.a > 0)
+                        buffer[count++] = new Modeler(position: pos,
+                                                      rotation: 0,
+                                                      color: emission,
+                                                      shape: shapes.pole);
 
-                    // Rotation advance
+                    // Rotation
                     angle += math.PI / 2;
                 }
 
@@ -101,26 +118,26 @@ static class SceneBuilder
                 pos.z += cfg.NodeStride;
 
                 // Probability decay
-                prob *= hash.Float(decay, 1.0f, seed++);
+                prob *= hash.Float(decay, 1, seed++);
             }
 
             // Emitter extension
-            if (emitter)
+            var ext = emission.a > 0 ? hash.Int(10, seed++) : 0;
+
+            for (var j = 0; j < ext; j++)
             {
-                var ext = hash.Int(10, seed++);
-                for (var j = 0; j < ext; j++)
-                {
-                    outBuffer[outCount++] =
-                      new Modeler(position: pos,
-                                  rotation: 0,
-                                  color: ecolor,
-                                  shape: shapes.pole);
-                    pos.z += cfg.NodeStride;
-                }
+                // Emitter model
+                buffer[count++] = new Modeler(position: pos,
+                                              rotation: 0,
+                                              color: emission,
+                                              shape: shapes.pole);
+
+                // Stride
+                pos.z += cfg.NodeStride;
             }
         }
 
-        return outBuffer.Slice(0, outCount);
+        return buffer.Slice(0, count);
     }
 }
 

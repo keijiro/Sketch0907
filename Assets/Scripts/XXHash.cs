@@ -31,12 +31,12 @@ public readonly struct XXHash
 
     public uint UInt(uint max, uint data)
     {
-        return UInt(data) % max;
+        return max > 0u ? UInt(data) % max : 0u;
     }
 
     public uint UInt(uint min, uint max, uint data)
     {
-        return UInt(data) % (max - min) + min;
+        return min != max ? UInt(data) % (max - min) + min : min;
     }
 
     // int
@@ -48,12 +48,12 @@ public readonly struct XXHash
 
     public int Int(int max, uint data)
     {
-        return (int)UInt(data) % max;
+        return max > 0 ? (int)UInt(data) % max : 0;
     }
 
     public int Int(int min, int max, uint data)
     {
-        return (int)UInt(data) % (max - min) + min;
+        return min != max ? (int)UInt(data) % (max - min) + min : min;
     }
 
     // int2
