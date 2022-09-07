@@ -32,7 +32,7 @@ struct SceneConfig
 
 static class SceneBuilder
 {
-    public static int Build
+    public static Span<Modeler> Build
       (SceneConfig cfg,
        (GeometryCache board, GeometryCache pole) shapes,
        Span<Modeler> outBuffer)
@@ -120,7 +120,7 @@ static class SceneBuilder
             }
         }
 
-        return outCount;
+        return outBuffer.Slice(0, outCount);
     }
 }
 

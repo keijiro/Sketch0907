@@ -32,10 +32,8 @@ sealed class SceneRenderer : MonoBehaviour
     {
         if (_mesh == null) return;
 
-        // Clear
+        // Clear and reconstruction
         _mesh.Clear();
-
-        // Reconstruction
         ConstructMesh();
     }
 
@@ -47,19 +45,23 @@ sealed class SceneRenderer : MonoBehaviour
     #region Private members
 
     Mesh _mesh;
-    Modeler[] _modelers;
+    Modeler[] _sceneBuffer;
 
     void ConstructMesh()
     {
-        if ((_modelers?.Length ?? 0) != _modelCapacity)
-            _modelers = new Modeler[_modelCapacity];
+        // Scene buffer (modeler array) allocation
+        if ((_sceneBuffer?.Length ?? 0) != _modelCapacity)
+            _sceneBuffer = new Modeler[_modelCapacity];
 
+        // Geometry cache (should live until mesh building)
         using var board = new GeometryCache(_boardMesh);
         using var pole = new GeometryCache(_poleMesh);
 
-        var mcount = SceneBuilder.Build(_config, (board, pole), _modelers);
+        // Model-level scene building
+        var scene = SceneBuilder.Build(_config, (board, pole), _sceneBuffer);
 
-        MeshBuilder.Build(new Span<Modeler>(_modelers, 0, mcount), _mesh);
+        // Mesh building from the model array
+        MeshBuilder.Build(scene, _mesh);
     }
 
     #endregion
