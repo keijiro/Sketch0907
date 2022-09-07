@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Sketch {
 
+// Mesh read cache with NativeArrray
 sealed class GeometryCache : System.IDisposable
 {
     public NativeArray<float3> Vertices;
@@ -12,8 +13,10 @@ sealed class GeometryCache : System.IDisposable
 
     public GeometryCache(Mesh mesh)
     {
-        Vertices = new NativeArray<Vector3>(mesh.vertices, Allocator.Persistent).Reinterpret<float3>();
-        Indices = new NativeArray<int>(mesh.triangles, Allocator.Persistent).Reinterpret<uint>();
+        var v = new NativeArray<Vector3>(mesh.vertices, Allocator.Persistent);
+        var i = new NativeArray<int>(mesh.triangles, Allocator.Persistent);
+        Vertices = v.Reinterpret<float3>();
+        Indices = i.Reinterpret<uint>();
     }
 
     public void Dispose()
@@ -23,19 +26,21 @@ sealed class GeometryCache : System.IDisposable
     }
 }
 
+// Weak reference to GeometryCache contents
 readonly struct GeometryCacheRef
 {
     public readonly NativeSlice<float3> Vertices;
     public readonly NativeSlice<uint> Indices;
-
-    public static implicit operator GeometryCacheRef(GeometryCache cache)
-      => new GeometryCacheRef(cache);
 
     public GeometryCacheRef(GeometryCache geo)
     {
         Vertices = new NativeSlice<float3>(geo.Vertices);
         Indices = new NativeSlice<uint>(geo.Indices);
     }
+
+    // Implicit conversion operator
+    public static implicit operator GeometryCacheRef(GeometryCache cache)
+      => new GeometryCacheRef(cache);
 }
 
 } // namespace Sketch
