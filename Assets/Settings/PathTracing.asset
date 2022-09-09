@@ -23,7 +23,7 @@ MonoBehaviour:
       m_Bits: 4294967295
   maximumSamples:
     m_OverrideState: 1
-    m_Value: 100
+    m_Value: 99
   minimumDepth:
     m_OverrideState: 0
     m_Value: 1
@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Value: 200
   denoising:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   useAOVs:
     m_OverrideState: 1
     m_Value: 1
