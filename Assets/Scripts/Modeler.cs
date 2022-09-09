@@ -11,6 +11,7 @@ readonly struct Modeler
 
     readonly float3 _position;
     readonly float _rotation;
+    readonly float _scale;
     readonly float4 _color;
     readonly GeometryCacheRef _shape;
 
@@ -27,11 +28,13 @@ readonly struct Modeler
 
     public Modeler(Vector3 position,
                    float rotation,
+                   float scale,
                    Color color,
                    GeometryCacheRef shape)
     {
         _position = position;
         _rotation = rotation;
+        _scale = scale;
         _color = (Vector4)color;
         _shape = shape;
     }
@@ -53,7 +56,7 @@ readonly struct Modeler
     void CopyVertices(Span<float3> dest)
     {
         var rot = quaternion.RotateZ(_rotation);
-        var mtx = float4x4.TRS(_position, rot, 1);
+        var mtx = float4x4.TRS(_position, rot, _scale);
         for (var i = 0; i < _shape.Vertices.Length; i++)
             dest[i] = math.transform(mtx, _shape.Vertices[i]);
     }

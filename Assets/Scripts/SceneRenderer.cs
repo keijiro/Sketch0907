@@ -23,16 +23,10 @@ sealed class SceneRenderer : MonoBehaviour
         _mesh = new Mesh();
         _mesh.hideFlags = HideFlags.DontSave;
         GetComponent<MeshFilter>().sharedMesh = _mesh;
-
-        // Initial mesh construction
-        ConstructMesh();
     }
 
-    void OnValidate()
-    {
-        // Mesh reconstruction
-        if (_mesh != null) ConstructMesh();
-    }
+    void Update()
+      => ConstructMesh();
 
     void OnDestroy()
       => Util.DestroyObject(_mesh);
@@ -46,6 +40,8 @@ sealed class SceneRenderer : MonoBehaviour
 
     void ConstructMesh()
     {
+        if (_mesh == null) return;
+
         // Scene buffer (modeler array) allocation
         if ((_sceneBuffer?.Length ?? 0) != _modelCapacity)
             _sceneBuffer = new Modeler[_modelCapacity];
@@ -55,7 +51,8 @@ sealed class SceneRenderer : MonoBehaviour
         using var pole = new GeometryCache(_poleMesh);
 
         // Model-level scene building
-        var scene = SceneBuilder.Build(_config, (board, pole), _sceneBuffer);
+        var scene = SceneBuilder.Build
+          (_config, (board, pole), Time.time, _sceneBuffer);
 
         // Mesh building from the model array
         MeshBuilder.Build(scene, _mesh);

@@ -53,6 +53,7 @@ static class SceneBuilder
     public static Span<Modeler> Build
       (in SceneConfig cfg,
        (GeometryCacheRef board, GeometryCacheRef pole) shapes,
+       float time,
        Span<Modeler> buffer)
     {
         // PRNG
@@ -74,6 +75,10 @@ static class SceneBuilder
             // Probability decay coefficient
             var decay = hash.Float(0.1f, 0.96f, seed++);
 
+            //
+            var t = math.frac(time / hash.Float(1, 3, seed++));
+            var s = math.min(math.smoothstep(0, 0.5f, t), 1 - math.smoothstep(0.5f, 1, t));
+
             // Pole extension loop
             for (var prob = 1.0f; prob > 0.2f;)
             {
@@ -94,12 +99,14 @@ static class SceneBuilder
                     if (hash.Float(seed++) < prob)
                         buffer[count++] = new Modeler(position: p1,
                                                       rotation: angle,
+                                                      scale: s,
                                                       color: Color.black,
                                                       shape: shapes.board);
 
                     // Pole model
                     buffer[count++] = new Modeler(position: p2,
                                                   rotation: angle,
+                                                  scale: s,
                                                   color: Color.black,
                                                   shape: shapes.pole);
 
@@ -107,6 +114,7 @@ static class SceneBuilder
                     if (emission.a > 0)
                         buffer[count++] = new Modeler(position: pos,
                                                       rotation: 0,
+                                                      scale: s,
                                                       color: emission,
                                                       shape: shapes.pole);
 
@@ -129,6 +137,7 @@ static class SceneBuilder
                 // Emitter model
                 buffer[count++] = new Modeler(position: pos,
                                               rotation: 0,
+                                              scale: s,
                                               color: emission,
                                               shape: shapes.pole);
 

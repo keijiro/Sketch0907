@@ -191,8 +191,8 @@ MonoBehaviour:
     BaseRange: 1.25
     NodeStride: 0.1
     EmissionRate: 0.4
-    EmissionColor1: {r: 0, g: 0.17183256, b: 0.22745098, a: 1}
-    EmissionColor2: {r: 1, g: 0.116883114, b: 0, a: 1}
+    EmissionColor1: {r: 0, g: 0.11402543, b: 0.22745098, a: 1}
+    EmissionColor2: {r: 0, g: 1, b: 0.30554104, a: 1}
     EmissionIntensity: 600
     Seed: 10
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
@@ -313,7 +313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1137042503
 Transform:
   m_ObjectHideFlags: 0
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsGlobal: 1
-  priority: 0
+  priority: 1
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 22d02086e6089f445a3f7a7f2d7633ec, type: 2}
