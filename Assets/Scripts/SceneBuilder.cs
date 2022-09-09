@@ -115,6 +115,11 @@ static class SceneBuilder
                 var scale = f_i - f_o;
                 var angle2 = angle + (f_i + f_o) * cfg.Twist;
 
+                // Is visible?
+                var vis = t2 > 0 && t2 < 1;
+
+                // We can't skip the block bellow to keep the seed consistency.
+
                 for (var k = 0; k < 4; k++)
                 {
                     // Rotation matrix
@@ -129,7 +134,7 @@ static class SceneBuilder
                     var p2 = pos + math.float3(math.mul(rot, d2), 0);
 
                     // Board model
-                    if (math.max(0.2f, hash.Float(seed++)) < prob)
+                    if (math.max(0.2f, hash.Float(seed++)) < prob && vis)
                         buffer[count++] = new Modeler(position: p1,
                                                       rotation: angle2,
                                                       scale: scale,
@@ -137,7 +142,7 @@ static class SceneBuilder
                                                       shape: shapes.board);
 
                     // Pole model
-                    if (0.2f < prob)
+                    if (0.2f < prob && vis)
                         buffer[count++] = new Modeler(position: p2,
                                                       rotation: angle2,
                                                       scale: scale,
@@ -145,7 +150,7 @@ static class SceneBuilder
                                                       shape: shapes.pole);
 
                     // Emitter model
-                    if (emission.a > 0)
+                    if (emission.a > 0 && vis)
                         buffer[count++] = new Modeler(position: pos,
                                                       rotation: 0,
                                                       scale: scale,
