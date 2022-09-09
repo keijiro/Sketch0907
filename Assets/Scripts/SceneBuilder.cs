@@ -76,17 +76,23 @@ static class SceneBuilder
        float time,
        Span<Modeler> buffer)
     {
-        var global_hash = new XXHash(cfg.Seed);
+        // PRNG for the root level
+        var root_hash = new XXHash(cfg.Seed);
+
+        // Buffer output count
         var count = 0;
 
-        // Pole instancing
         for (var i = 0; i < cfg.PoleCount; i++)
         {
-            var hash = new XXHash(global_hash.UInt((uint)i));
+            // Per-pole PRNG
+            var hash = new XXHash(root_hash.UInt((uint)i));
+
+            // Pole instance
             var slice = AddPole(cfg, shapes, hash, time, buffer.Slice(count));
             count += slice.Length;
         }
 
+        // Used area in the model buffer
         return buffer.Slice(0, count);
     }
 
@@ -107,8 +113,8 @@ static class SceneBuilder
         // Time parameter
         var t = time - hash.Float(0, cfg.PoleDelay, seed++);
 
-        // Base position
-        var pos = math.float3(hash.InCircle(seed++) * cfg.BaseRange, 0);
+        // Pole origin (base position)
+        var origin = math.float3(hash.InCircle(seed++) * cfg.BaseRange, 0);
 
         // Base angle
         var angle = hash.Bool(seed++) ? 0 : math.PI / 4;
@@ -120,77 +126,109 @@ static class SceneBuilder
         // Probability decay coefficient
         var decay = hash.Float(0.1f, 0.96f, seed++);
 
-        // Pole extension loop
-        var min_prob = 0.2f * math.pow(decay, hash.Float(2, 7, seed++));
-        for (var prob = 1.0f; prob > min_prob;)
+        // Z displacement
+        var z = 0.0f;
+
+        // Pole expansion loop
+        for (var prob = 1.0f; prob > 0.2f;)
         {
             // Per-node time parameter
-            var t2 = (t - pos.z * cfg.NodeDelay) / cfg.Lifetime;
+            var t_n = (t - z * cfg.NodeDelay) / cfg.Lifetime;
 
-            // Fade in / out parameter
-            var f_i = math.smoothstep(0, cfg.FadeRange, t2);
-            var f_o = math.smoothstep(1 - cfg.FadeRange, 1, t2);
-
-            // Per-node scale / angle
-            var scale = f_i - f_o;
-            var angle2 = angle + (f_i + f_o) * cfg.Twist;
+            // Per-node PRNG
+            var hash_n = new XXHash(hash.UInt(seed++));
 
             // Is visible?
-            var vis = t2 > 0 && t2 < 1;
-
-            // We can't skip the block bellow to keep the seed consistency.
-
-            for (var k = 0; k < 4; k++)
+            if (0 < t_n && t_n < 1)
             {
-                // Rotation matrix
-                var rot = float2x2.Rotate(angle2);
+                // Fade in / out parameter
+                var f_i = math.smoothstep(0, cfg.FadeRange, t_n);
+                var f_o = math.smoothstep(1 - cfg.FadeRange, 1, t_n);
 
-                // Board: Displacement / position
-                var d1 = math.float2(cfg.NodeStride / 2, 0);
-                var p1 = pos + math.float3(math.mul(rot, d1), 0);
+                // Per-node scale / angle
+                var scale_n = f_i - f_o;
+                var angle_n = angle + (f_i + f_o) * cfg.Twist;
 
-                // Pole: Displacement / position
-                var d2 = (float2)(cfg.NodeStride / 2);
-                var p2 = pos + math.float3(math.mul(rot, d2), 0);
-
-                // Board model
-                if (math.max(0.2f, hash.Float(seed++)) < prob && vis)
-                    buffer[count++] = new Modeler(position: p1,
-                                                  rotation: angle2,
-                                                  scale: scale,
-                                                  color: Color.black,
-                                                  shape: shapes.board);
-
-                // Pole model
-                if (0.2f < prob && vis)
-                    buffer[count++] = new Modeler(position: p2,
-                                                  rotation: angle2,
-                                                  scale: scale,
-                                                  color: Color.black,
-                                                  shape: shapes.pole);
-
-                // Emitter model
-                if (emission.a > 0 && vis)
-                    buffer[count++] = new Modeler(position: pos,
-                                                  rotation: 0,
-                                                  scale: scale,
-                                                  color: emission,
-                                                  shape: shapes.pole);
-
-                // Rotation
-                angle2 += math.PI / 2;
+                // Node instance
+                var slice = AddNode(cfg, shapes,
+                                    hash_n, prob,
+                                    origin, z, angle_n, scale_n,
+                                    buffer.Slice(count));
+                count += slice.Length;
             }
 
-            // Stride
-            pos.z += cfg.NodeStride;
+            // Z stride
+            z += cfg.NodeStride;
 
             // Probability decay
             prob *= hash.Float(decay, 1, seed++);
         }
 
+        // Emitter model
+        if (emission.a > 0)
+        {
+            z += cfg.NodeStride * hash.Float(1, 3, seed++);
+            var f_i = math.saturate(t / (cfg.NodeDelay * z + cfg.FadeRange * cfg.Lifetime));
+            var f_o = math.saturate((t - (cfg.Lifetime - cfg.FadeRange * cfg.Lifetime)) / (cfg.FadeRange * cfg.Lifetime + cfg.NodeDelay * z));
+
+            //var f_i = math.smoothstep(0, cfg.NodeDelay * z + cfg.FadeRange * cfg.Lifetime, t);
+            //var f_o = math.smoothstep(cfg.Lifetime - cfg.FadeRange * cfg.Lifetime, cfg.Lifetime + cfg.NodeDelay * z, t);
+
+            if (f_i > 0 && f_o < 1)
+            buffer[count++] = new Modeler(position: origin + math.float3(0, 0, z / 2 * (f_i + f_o)),
+                                          rotation: 0,
+                                          scale: math.float3(1, 1, z / cfg.NodeStride * (f_i - f_o)),
+                                          color: emission,
+                                          shape: shapes.pole);
+        }
+
         return buffer.Slice(0, count);
     }
 
+    // Bbuilder method: Node
+    static Span<Modeler> AddNode
+      (in SceneConfig cfg,
+       (GeometryCacheRef board, GeometryCacheRef pole) shapes,
+       XXHash hash, float prob,
+       float3 origin, float z, float angle, float scale,
+       Span<Modeler> buffer)
+    {
+        var count = 0;
+
+        for (var i = 0u; i < 4u; i++)
+        {
+            // Rotation matrix
+            var rot = float2x2.Rotate(angle);
+
+            // Board: Displacement / position
+            var d1 = math.float2(cfg.NodeStride / 2, 0);
+            var p1 = origin + math.float3(math.mul(rot, d1), z);
+
+            // Pole: Displacement / position
+            var d2 = (float2)(cfg.NodeStride / 2);
+            var p2 = origin + math.float3(math.mul(rot, d2), z);
+
+            // Board model
+            if (hash.Float(i) < prob)
+                buffer[count++] = new Modeler(position: p1,
+                                              rotation: angle,
+                                              scale: scale,
+                                              color: Color.black,
+                                              shape: shapes.board);
+
+            // Pole model
+            buffer[count++] = new Modeler(position: p2,
+                                          rotation: angle,
+                                          scale: scale,
+                                          color: Color.black,
+                                          shape: shapes.pole);
+
+            // Rotation
+            angle += math.PI / 2;
+        }
+
+        return buffer.Slice(0, count);
+    }
 }
 
 } // namespace Sketch

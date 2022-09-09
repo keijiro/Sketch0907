@@ -11,7 +11,7 @@ readonly struct Modeler
 
     readonly float3 _position;
     readonly float _rotation;
-    readonly float _scale;
+    readonly float3 _scale;
     readonly float4 _color;
     readonly GeometryCacheRef _shape;
 
@@ -28,7 +28,7 @@ readonly struct Modeler
 
     public Modeler(Vector3 position,
                    float rotation,
-                   float scale,
+                   float3 scale,
                    Color color,
                    GeometryCacheRef shape)
     {
