@@ -13,6 +13,7 @@ sealed class SceneRenderer : MonoBehaviour
     [SerializeField] Mesh _poleMesh = null;
     [SerializeField] uint _modelCapacity = 10000;
     [SerializeField] float _stillTime = -1;
+    [SerializeField] float _timeOffset = 0;
 
     #endregion
 
@@ -51,7 +52,7 @@ sealed class SceneRenderer : MonoBehaviour
         if (_mesh == null) return;
 
         // Time control
-        var time = _stillTime < 0 ? Time.time : _stillTime;
+        var time = _stillTime < 0 ? Time.time + _timeOffset : _stillTime;
         if (!forceUpdate && _prevTime >= 0 && _prevTime == time) return;
         _prevTime = time;
 
