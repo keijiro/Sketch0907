@@ -7,6 +7,7 @@ sealed class FocusController : MonoBehaviour
 {
     [SerializeField] float _fadeDuration = 1.5f;
     [SerializeField] float _endTime = 8;
+    [SerializeField] float _startDistance = 1.5f;
 
     Camera _camera;
     float _targetFocus;
@@ -21,8 +22,7 @@ sealed class FocusController : MonoBehaviour
     {
         var t1 = math.saturate(Time.time / _fadeDuration);
         var t2 = math.saturate((_endTime - Time.time) / _fadeDuration);
-        var x = 1 - math.pow(1 - math.min(t1, t2), 2);
-        _camera.focusDistance = math.lerp(0.1f, _targetFocus, x);
+        _camera.focusDistance = math.lerp(0.1f, _targetFocus, math.min(t1, t2));
     }
 }
 

@@ -204,7 +204,7 @@ MonoBehaviour:
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
   _poleMesh: {fileID: -8670151273213183110, guid: 0f4e77f962c4bb646b3fd1a5e289118c, type: 3}
   _modelCapacity: 10000
-  _stillTime: 1
+  _stillTime: -1
 --- !u!4 &403490014
 Transform:
   m_ObjectHideFlags: 0
@@ -685,7 +685,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fadeDuration: 1.5
-  _endTime: 7.2
+  _endTime: 8
+  _startDistance: 1.5
 --- !u!1 &2013153173
 GameObject:
   m_ObjectHideFlags: 0
