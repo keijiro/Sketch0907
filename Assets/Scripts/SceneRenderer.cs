@@ -12,6 +12,7 @@ sealed class SceneRenderer : MonoBehaviour
     [SerializeField] Mesh _boardMesh = null;
     [SerializeField] Mesh _poleMesh = null;
     [SerializeField] uint _modelCapacity = 10000;
+    [SerializeField] float _stillTime = -1;
 
     #endregion
 
@@ -23,6 +24,9 @@ sealed class SceneRenderer : MonoBehaviour
         _mesh = new Mesh();
         _mesh.hideFlags = HideFlags.DontSave;
         GetComponent<MeshFilter>().sharedMesh = _mesh;
+
+        // State reset
+        _prevTime = -1;
     }
 
     void Update()
@@ -31,16 +35,25 @@ sealed class SceneRenderer : MonoBehaviour
     void OnDestroy()
       => Util.DestroyObject(_mesh);
 
+    void OnValidate()
+      => ConstructMesh(true);
+
     #endregion
 
     #region Private members
 
     Mesh _mesh;
     Modeler[] _sceneBuffer;
+    float _prevTime;
 
-    void ConstructMesh()
+    void ConstructMesh(bool forceUpdate = false)
     {
         if (_mesh == null) return;
+
+        // Time control
+        var time = _stillTime < 0 ? Time.time : _stillTime;
+        if (!forceUpdate && _prevTime >= 0 && _prevTime == time) return;
+        _prevTime = time;
 
         // Scene buffer (modeler array) allocation
         if ((_sceneBuffer?.Length ?? 0) != _modelCapacity)
@@ -52,7 +65,7 @@ sealed class SceneRenderer : MonoBehaviour
 
         // Model-level scene building
         var scene = SceneBuilder.Build
-          (_config, (board, pole), Time.time, _sceneBuffer);
+          (_config, (board, pole), time, _sceneBuffer);
 
         // Mesh building from the model array
         MeshBuilder.Build(scene, _mesh);
