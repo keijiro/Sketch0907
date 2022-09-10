@@ -197,13 +197,14 @@ MonoBehaviour:
     NodeDelay: 0.6
     FadeRange: 0.2
     EmissionRate: 0.4
-    EmissionColor1: {r: 0, g: 0.11402543, b: 0.22745098, a: 1}
-    EmissionColor2: {r: 0, g: 1, b: 0.30554104, a: 1}
-    EmissionIntensity: 600
-    Seed: 406
+    EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
+    EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
+    EmissionIntensity: 200
+    Seed: 416
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
   _poleMesh: {fileID: -8670151273213183110, guid: 0f4e77f962c4bb646b3fd1a5e289118c, type: 3}
   _modelCapacity: 10000
+  _stillTime: -0.63
 --- !u!4 &403490014
 Transform:
   m_ObjectHideFlags: 0
@@ -269,6 +270,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403490012}
   m_Mesh: {fileID: 0}
+--- !u!1 &553667108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 553667109}
+  - component: {fileID: 553667110}
+  m_Layer: 0
+  m_Name: Post Fx
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &553667109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553667108}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 602793764}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &553667110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553667108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 9f154ba4753ccaa4dbb33750bace4236, type: 2}
 --- !u!1 &602793763
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +348,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2013153174}
+  - {fileID: 553667109}
   - {fileID: 1300141586}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -583,7 +634,7 @@ Camera:
   m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
-  m_Iso: 2000
+  m_Iso: 1000
   m_ShutterSpeed: 0.02
   m_Aperture: 0.7
   m_FocusDistance: 6
