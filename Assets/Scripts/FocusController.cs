@@ -22,7 +22,7 @@ sealed class FocusController : MonoBehaviour
     {
         var t1 = math.saturate(Time.time / _fadeDuration);
         var t2 = math.saturate((_endTime - Time.time) / _fadeDuration);
-        _camera.focusDistance = math.lerp(0.1f, _targetFocus, math.min(t1, t2));
+        _camera.focusDistance = math.lerp(_startDistance, _targetFocus, math.min(t1, t2));
     }
 }
 
