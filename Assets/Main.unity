@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291532290}
   m_LocalRotation: {x: 0.48385268, y: -0.64702356, z: 0.26661128, w: 0.5255146}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -190,10 +190,10 @@ MonoBehaviour:
     PoleCount: 80
     BaseRange: 1.25
     NodeStride: 0.1
-    Lifetime: 5
-    Rotation: 2
+    Lifetime: 6.1
+    Rotation: 2.4
     Twist: 2
-    PoleDelay: 2
+    PoleDelay: 3
     NodeDelay: 0.6
     FadeRange: 0.2
     EmissionRate: 0.4
@@ -204,7 +204,7 @@ MonoBehaviour:
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
   _poleMesh: {fileID: -8670151273213183110, guid: 0f4e77f962c4bb646b3fd1a5e289118c, type: 3}
   _modelCapacity: 10000
-  _stillTime: -1
+  _stillTime: -0.35
 --- !u!4 &403490014
 Transform:
   m_ObjectHideFlags: 0
@@ -403,9 +403,9 @@ MonoBehaviour:
     y: 0.1
     z: 0.1
   rotationAmount:
-    x: 1
-    y: 1
-    z: 1
+    x: 2
+    y: 2
+    z: 2
   frequency: 0.1
   octaves: 1
   seed: 198
@@ -685,7 +685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fadeDuration: 1.5
-  _endTime: 8
+  _endTime: 10
   _startDistance: 1.5
 --- !u!1 &2013153173
 GameObject:
