@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a5edd2df1ecb6459822dbfa17e07ea, type: 3}
   m_Name: Overlay
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   sourceType:
     m_OverrideState: 0
     m_Value: 1
@@ -189,10 +189,10 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.8446433, z: 0.99118465, w: 0.10870736}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.16949153}
   midtones:
-    m_OverrideState: 1
-    m_Value: {x: 1, y: 0.93583405, z: 0.9445287, w: 0}
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
   highlights:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0}
