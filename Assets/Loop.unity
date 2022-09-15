@@ -205,7 +205,7 @@ MonoBehaviour:
   _poleMesh: {fileID: -8670151273213183110, guid: 0f4e77f962c4bb646b3fd1a5e289118c, type: 3}
   _modelCapacity: 10000
   _stillTime: -1
-  _timeOffset: 0
+  _timeOffset: -1
 --- !u!4 &403490014
 Transform:
   m_ObjectHideFlags: 0
@@ -454,7 +454,7 @@ MonoBehaviour:
   _poleMesh: {fileID: -8670151273213183110, guid: 0f4e77f962c4bb646b3fd1a5e289118c, type: 3}
   _modelCapacity: 10000
   _stillTime: -1
-  _timeOffset: 2.5
+  _timeOffset: 1.5
 --- !u!4 &743808790
 Transform:
   m_ObjectHideFlags: 0
@@ -837,7 +837,7 @@ MonoBehaviour:
   _poleMesh: {fileID: -8670151273213183110, guid: 0f4e77f962c4bb646b3fd1a5e289118c, type: 3}
   _modelCapacity: 10000
   _stillTime: -1
-  _timeOffset: -2.5
+  _timeOffset: -3.5
 --- !u!4 &999556319
 Transform:
   m_ObjectHideFlags: 0
