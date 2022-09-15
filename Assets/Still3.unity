@@ -856,10 +856,10 @@ Camera:
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_Iso: 1000
-  m_ShutterSpeed: 0.02
-  m_Aperture: 0.7
+  m_ShutterSpeed: 0.04
+  m_Aperture: 1.4
   m_FocusDistance: 6
-  m_FocalLength: 60
+  m_FocalLength: 120
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -874,7 +874,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 100
-  field of view: 14.762174
+  field of view: 7.411837
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
