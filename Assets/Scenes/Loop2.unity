@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291532290}
   m_LocalRotation: {x: -0.01562806, y: -0.94437295, z: 0.045361474, w: -0.32535794}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 325608007}
   - component: {fileID: 325608006}
   m_Layer: 0
-  m_Name: Renderer 1 (2)
+  m_Name: Renderer 2b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 90b4288d35aec8e4484120fb91a504ae, type: 2}
+  - {fileID: 2100000, guid: 38df9591f92e8d341b01ff62eaea04ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -237,20 +237,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 45
+    PoleCount: 150
     BaseRange: 1.65
     NodeStride: 0.1
-    Lifetime: 8
+    Lifetime: 6
     Rotation: 2.4
     Twist: 2
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.4
+    EmissionRate: 0.49999997
     EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
-    Seed: 594
+    Seed: 1437
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
   _poleMesh: {fileID: -8670151273213183110, guid: 0f4e77f962c4bb646b3fd1a5e289118c, type: 3}
   _modelCapacity: 10000
@@ -303,20 +303,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 45
+    PoleCount: 150
     BaseRange: 1.65
     NodeStride: 0.1
-    Lifetime: 8
+    Lifetime: 6
     Rotation: 2.4
     Twist: 2
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.4
+    EmissionRate: 0.49999997
     EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
-    Seed: 535
+    Seed: 930
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
   _poleMesh: {fileID: -8670151273213183110, guid: 0f4e77f962c4bb646b3fd1a5e289118c, type: 3}
   _modelCapacity: 10000
@@ -357,7 +357,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 90b4288d35aec8e4484120fb91a504ae, type: 2}
+  - {fileID: 2100000, guid: 38df9591f92e8d341b01ff62eaea04ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -403,7 +403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &553667109
 Transform:
   m_ObjectHideFlags: 0
@@ -720,7 +720,7 @@ Transform:
   - {fileID: 802909791}
   m_Father: {fileID: 291532291}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -1, y: -1, z: 0}
+  m_LocalEulerAnglesHint: {x: 1, y: 1, z: 0}
 --- !u!111 &848260755
 Animation:
   m_ObjectHideFlags: 0
@@ -730,9 +730,9 @@ Animation:
   m_GameObject: {fileID: 848260753}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 07123fb38ac164f39b679514075da3a7, type: 2}
+  m_Animation: {fileID: 7400000, guid: e6925389513eff344a0fc208bbda4dc1, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 07123fb38ac164f39b679514075da3a7, type: 2}
+  - {fileID: 7400000, guid: e6925389513eff344a0fc208bbda4dc1, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -753,7 +753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1300141586
 Transform:
   m_ObjectHideFlags: 0
@@ -812,7 +812,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301261133}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -7.5}
+  m_LocalPosition: {x: 0, y: 0, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -965,7 +965,7 @@ Camera:
   m_Iso: 1000
   m_ShutterSpeed: 0.02
   m_Aperture: 0.7
-  m_FocusDistance: 6
+  m_FocusDistance: 8
   m_FocalLength: 60
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 1832342944}
   - component: {fileID: 1832342943}
   m_Layer: 0
-  m_Name: Renderer 1 (1)
+  m_Name: Renderer 2a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1038,7 +1038,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 90b4288d35aec8e4484120fb91a504ae, type: 2}
+  - {fileID: 2100000, guid: 38df9591f92e8d341b01ff62eaea04ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1081,20 +1081,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 45
+    PoleCount: 150
     BaseRange: 1.65
     NodeStride: 0.1
-    Lifetime: 8
+    Lifetime: 6
     Rotation: 2.4
     Twist: 2
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.4
+    EmissionRate: 0.49999997
     EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
-    Seed: 594
+    Seed: 1437
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
   _poleMesh: {fileID: -8670151273213183110, guid: 0f4e77f962c4bb646b3fd1a5e289118c, type: 3}
   _modelCapacity: 10000
