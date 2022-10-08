@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 150
+    PoleCount: 200
     BaseRange: 1.65
     NodeStride: 0.1
     Lifetime: 6
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 150
+    PoleCount: 200
     BaseRange: 1.65
     NodeStride: 0.1
     Lifetime: 6
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 200
+  m_Intensity: 400
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -637,7 +637,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 127.32395
+  m_Intensity: 254.6479
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -720,7 +720,7 @@ Transform:
   - {fileID: 802909791}
   m_Father: {fileID: 291532291}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 1, y: 1, z: 0}
+  m_LocalEulerAnglesHint: {x: -1, y: -1, z: 0}
 --- !u!111 &848260755
 Animation:
   m_ObjectHideFlags: 0
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 150
+    PoleCount: 200
     BaseRange: 1.65
     NodeStride: 0.1
     Lifetime: 6
