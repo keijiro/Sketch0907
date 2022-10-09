@@ -247,8 +247,8 @@ MonoBehaviour:
     NodeDelay: 2
     FadeRange: 0.2
     EmissionRate: 0.49999997
-    EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
-    EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
+    EmissionColor1: {r: 1, g: 0.237903, b: 0, a: 1}
+    EmissionColor2: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionIntensity: 200
     Seed: 1437
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
@@ -1091,8 +1091,8 @@ MonoBehaviour:
     NodeDelay: 2
     FadeRange: 0.2
     EmissionRate: 0.49999997
-    EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
-    EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
+    EmissionColor1: {r: 1, g: 0.237903, b: 0, a: 1}
+    EmissionColor2: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionIntensity: 200
     Seed: 1437
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
