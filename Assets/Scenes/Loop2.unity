@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 175
+    PoleCount: 100
     BaseRange: 1.65
     NodeStride: 0.1
     Lifetime: 6
@@ -246,9 +246,9 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.35
-    EmissionColor1: {r: 1, g: 0.237903, b: 0, a: 1}
-    EmissionColor2: {r: 0, g: 0.5, b: 1, a: 1}
+    EmissionRate: 0.3
+    EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
+    EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
     Seed: 1437
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 175
+    PoleCount: 100
     BaseRange: 1.65
     NodeStride: 0.1
     Lifetime: 6
@@ -312,7 +312,7 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.35
+    EmissionRate: 0.3
     EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 175
+    PoleCount: 100
     BaseRange: 1.65
     NodeStride: 0.1
     Lifetime: 6
@@ -1090,9 +1090,9 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.35
-    EmissionColor1: {r: 1, g: 0.237903, b: 0, a: 1}
-    EmissionColor2: {r: 0, g: 0.5, b: 1, a: 1}
+    EmissionRate: 0.3
+    EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
+    EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
     Seed: 1437
   _boardMesh: {fileID: -8670151273213183110, guid: 9ce01fc53b3523141825b150101134b2, type: 3}
