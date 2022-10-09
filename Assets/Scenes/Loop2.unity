@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291532290}
   m_LocalRotation: {x: -0.015620142, y: -0.94442976, z: 0.045364205, w: -0.32519314}
-  m_LocalPosition: {x: 0, y: 0, z: 0.55}
+  m_LocalPosition: {x: 0, y: 0, z: 0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 200
+    PoleCount: 175
     BaseRange: 1.65
     NodeStride: 0.1
     Lifetime: 6
@@ -246,7 +246,7 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.4
+    EmissionRate: 0.35
     EmissionColor1: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionColor2: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionIntensity: 200
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 200
+    PoleCount: 175
     BaseRange: 1.65
     NodeStride: 0.1
     Lifetime: 6
@@ -312,7 +312,7 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.4
+    EmissionRate: 0.35
     EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
@@ -812,7 +812,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301261133}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -9}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -965,7 +965,7 @@ Camera:
   m_Iso: 1000
   m_ShutterSpeed: 0.02
   m_Aperture: 0.7
-  m_FocusDistance: 9
+  m_FocusDistance: 10
   m_FocalLength: 60
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config:
-    PoleCount: 200
+    PoleCount: 175
     BaseRange: 1.65
     NodeStride: 0.1
     Lifetime: 6
@@ -1090,7 +1090,7 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.4
+    EmissionRate: 0.35
     EmissionColor1: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionColor2: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionIntensity: 200
