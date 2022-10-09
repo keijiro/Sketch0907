@@ -146,15 +146,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291532290}
-  m_LocalRotation: {x: -0.01562806, y: -0.94437295, z: 0.045361474, w: -0.32535794}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalRotation: {x: -0.015620142, y: -0.94442976, z: 0.045364205, w: -0.32519314}
+  m_LocalPosition: {x: 0, y: 0, z: 0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 848260754}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 5.5, y: -218.02, z: 0}
+  m_LocalEulerAnglesHint: {x: 5.5, y: -218, z: 0}
 --- !u!1 &325608005
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.49999997
+    EmissionRate: 0.4
     EmissionColor1: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionColor2: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionIntensity: 200
@@ -312,7 +312,7 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.49999997
+    EmissionRate: 0.4
     EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
@@ -812,7 +812,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301261133}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8}
+  m_LocalPosition: {x: 0, y: 0, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -965,7 +965,7 @@ Camera:
   m_Iso: 1000
   m_ShutterSpeed: 0.02
   m_Aperture: 0.7
-  m_FocusDistance: 8
+  m_FocusDistance: 9
   m_FocalLength: 60
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
@@ -1090,7 +1090,7 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.49999997
+    EmissionRate: 0.4
     EmissionColor1: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionColor2: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionIntensity: 200
