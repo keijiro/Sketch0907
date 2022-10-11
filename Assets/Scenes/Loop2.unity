@@ -246,7 +246,7 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.3
+    EmissionRate: 0.5
     EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
@@ -312,7 +312,7 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.3
+    EmissionRate: 0.5
     EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
@@ -1090,7 +1090,7 @@ MonoBehaviour:
     PoleDelay: 15
     NodeDelay: 2
     FadeRange: 0.2
-    EmissionRate: 0.3
+    EmissionRate: 0.5
     EmissionColor1: {r: 0, g: 0.5, b: 1, a: 1}
     EmissionColor2: {r: 1, g: 0.237903, b: 0, a: 1}
     EmissionIntensity: 200
